@@ -17,7 +17,7 @@ app.use(express.json());
 const allScores = {};
 
 // post a score for a user, writing over any previous score
-app.post('/scoresByUser/:userId', (req, res) => {
+app.post('/scoresByUser/:userId', async (req, res) => {
     if (!req.body.score) {
         console.log("No req.body.score found; did you forget to update putter & the postman json script?");
         res.sendStatus(400);
@@ -30,7 +30,7 @@ app.post('/scoresByUser/:userId', (req, res) => {
 });
 
 // get the score stored for this user
-app.get('/scoresByUser/:userId', (req, res) => {
+app.get('/scoresByUser/:userId', async (req, res) => {
     let score = allScores[req.params.userId];
     if (score == null) {
         res.sendStatus(404);
@@ -41,7 +41,7 @@ app.get('/scoresByUser/:userId', (req, res) => {
 });
 
 // start the server
-app.listen(port, (error) => {
+app.listen(port, error => {
     if (error != null) {
         console.log(`Error starting Express server on port ${port}: ${error}`);
     } else {
