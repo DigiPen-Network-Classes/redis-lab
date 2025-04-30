@@ -1,4 +1,5 @@
 const port = 13100;
+import redis from 'redis';
 
 // build a consistent response object
 function buildResult(userId, score) {
